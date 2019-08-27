@@ -1,1 +1,1 @@
-# staccato music blog
+# staccato
