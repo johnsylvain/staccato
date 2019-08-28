@@ -1,17 +1,24 @@
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
+import {
+  color,
+  typography,
+  space,
+  ColorProps,
+  TypographyProps,
+  SpaceProps,
+} from 'styled-system';
 
-type TextProps = {
-  bold?: boolean;
-  size?: keyof DefaultTheme['font']['size'];
-  color?: keyof DefaultTheme['color'];
-  align?: 'center' | 'right' | 'left';
-};
+type TextProps = SpaceProps &
+  ColorProps &
+  TypographyProps & {
+    bold?: boolean;
+    align?: 'center' | 'right' | 'left';
+  };
 
 export const Text = styled.div<TextProps>`
-  color: ${({ color, theme }) =>
-    color ? theme.color[color] : theme.color.text};
-  font-size: ${({ size, theme }) =>
-    size ? theme.font.size[size] : theme.font.size.md};
+  ${color}
+  ${space}
+  ${typography}
   font-weight: ${({ bold, theme }) =>
     bold ? theme.font.weight.bold : theme.font.weight.normal};
   text-align: ${({ align }) => (align ? align : 'left')};

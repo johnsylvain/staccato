@@ -16,7 +16,7 @@ const breakpoints = {
   lg: 1000,
 };
 
-const color = {
+const colors = {
   white: '#FFFFFF',
   offWhite: '#E5D9D9',
   text: '#2c2c2c',
@@ -33,13 +33,20 @@ const font = {
   size: {
     sm: '10px',
     md: '14px',
-    lg: '20px',
+    lg: '18px',
+    xl: '28px',
   },
 };
 
+// styped-system theme
+const fontSizes = Object.keys(font.size).map(key => font.size[key]);
+const space = ['0px', ...Object.keys(spacing).map(key => spacing[key])];
+
 export const theme: DefaultTheme = {
-  color,
+  colors,
   font,
+  fontSizes,
   spacing,
   breakpoints,
+  space,
 };

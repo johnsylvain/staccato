@@ -31,11 +31,11 @@ const ReviewBadge = styled.div`
   width: 60px;
   height: 60px;
   border-radius: 10px;
-  background: #ECE7E2;
+  background: #ece7e2;
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const AlbumFeature: React.FC<AlbumFeatureProps> = ({ album }) => {
   return (
@@ -43,11 +43,13 @@ export const AlbumFeature: React.FC<AlbumFeatureProps> = ({ album }) => {
       <Image src={`http:${album.coverArt.file.url}`} />
       <AlbumDetails>
         <div>
-          <Text bold size="lg">{album.albumName}</Text>
+          <Text bold fontSize="lg">
+            {album.albumName}
+          </Text>
           <Text>by {album.artistName}</Text>
         </div>
         <ReviewBadge>
-          <Text bold size="lg">
+          <Text bold fontSize="lg">
             {album.rating}
           </Text>
         </ReviewBadge>

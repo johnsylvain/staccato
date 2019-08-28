@@ -1,8 +1,9 @@
 import 'styled-components';
+import { Theme } from 'styled-system';
 
 declare module 'styled-components' {
-  export interface DefaultTheme {
-    color: {
+  export interface DefaultTheme extends Theme {
+    colors: {
       white: string;
       offWhite: string;
       text: string;
@@ -15,6 +16,8 @@ declare module 'styled-components' {
       lg: string;
       xl: string;
     };
+
+    space: string[];
 
     breakpoints: {
       sm: number;
@@ -35,6 +38,7 @@ declare module 'styled-components' {
         sm: string;
         md: string;
         lg: string;
+        xl: string;
       };
     };
   }

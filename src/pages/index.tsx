@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import styled from 'styled-components';
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
 import { Text } from '../components/text';
 import { AlbumFeature } from '../components/album-feature';
-import styled from 'styled-components';
 
 const Grid = styled.div`
   display: grid;
@@ -41,16 +41,16 @@ const IndexPage: React.FC = () => {
   return (
     <Layout>
       <SEO title="Home" />
-      <Text size="lg" bold align="center">
+      <Text my={5} fontSize={3} bold align="center">
         {data.site.siteMetadata.description}
       </Text>
-      {data.allContentfulReview.edges.length &&
+      {data.allContentfulReview.edges.length && (
         <Grid>
           {data.allContentfulReview.edges.slice(0, 3).map(({ node }) => (
             <AlbumFeature album={node}></AlbumFeature>
           ))}
         </Grid>
-      }
+      )}
     </Layout>
   );
 };

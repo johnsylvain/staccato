@@ -15,9 +15,9 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     background: linear-gradient(to right, ${props =>
-      props.theme.color.offWhite}, ${props => props.theme.color.white});
+      props.theme.colors.offWhite}, ${props => props.theme.colors.white});
     font-family: ${props => props.theme.font.family};
-    color: ${props => props.theme.color.text};
+    color: ${props => props.theme.colors.text};
   }
 `;
 
