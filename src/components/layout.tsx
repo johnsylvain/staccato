@@ -1,6 +1,30 @@
-import React from 'react';
+import * as React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import reset from 'styled-reset';
 import { Header } from './header';
+import { theme } from '../config/theme';
+
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: linear-gradient(to right, ${props =>
+      props.theme.color.offWhite}, ${props => props.theme.color.white});
+    font-family: ${props => props.theme.font.family};
+    color: ${props => props.theme.color.text};
+  }
+`;
+
+const Container = styled.div`
+  max-width: ${props => props.theme.breakpoints.lg}px;
+  padding: 0 ${props => props.theme.spacing.md};
+  margin: 0 auto;
+`;
 
 export const Layout: React.FC = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -14,23 +38,13 @@ export const Layout: React.FC = ({ children }) => {
   `);
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0px 1.0875rem 1.45rem`,
-          paddingTop: 0,
-        }}
-      >
+    <ThemeProvider theme={theme}>
+      <Container>
+        <GlobalStyle />
+        <Header siteTitle={data.site.siteMetadata.title} />
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    </>
+        <footer>© {new Date().getFullYear()} staccato</footer>
+      </Container>
+    </ThemeProvider>
   );
 };
