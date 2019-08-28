@@ -13,7 +13,7 @@ const spacing = {
 const breakpoints = {
   sm: 480,
   md: 768,
-  lg: 1200,
+  lg: 1000,
 };
 
 const color = {

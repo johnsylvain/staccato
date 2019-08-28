@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import reset from 'styled-reset';
 import { Header } from './header';
+import { Text } from './text';
 import { theme } from '../config/theme';
 
 const GlobalStyle = createGlobalStyle`
@@ -24,6 +25,17 @@ const Container = styled.div`
   max-width: ${props => props.theme.breakpoints.lg}px;
   padding: 0 ${props => props.theme.spacing.md};
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const Main = styled.main`
+  flex-grow: 1;
+`;
+
+const Footer = styled.footer`
+  padding: ${props => props.theme.spacing.lg} 0;
 `;
 
 export const Layout: React.FC = ({ children }) => {
@@ -42,8 +54,10 @@ export const Layout: React.FC = ({ children }) => {
       <Container>
         <GlobalStyle />
         <Header siteTitle={data.site.siteMetadata.title} />
-        <main>{children}</main>
-        <footer>© {new Date().getFullYear()} staccato</footer>
+        <Main>{children}</Main>
+        <Footer>
+          <Text>© {new Date().getFullYear()} staccato</Text>
+        </Footer>
       </Container>
     </ThemeProvider>
   );
