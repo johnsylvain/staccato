@@ -6,7 +6,7 @@ export const Button = styled.button<SpaceProps>`
   ${space}
 
   padding: ${props => props.theme.spacing.sm} ${props =>
-    props.theme.spacing.xl};
+  props.theme.spacing.xl};
   background: #f3f0ed;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
   border-radius: 10px;
@@ -26,4 +26,4 @@ export const Button = styled.button<SpaceProps>`
   }
 `;
 
-export const ButtonLink = Button.withComponent(Link)
+export const ButtonLink = Button.withComponent(Link);

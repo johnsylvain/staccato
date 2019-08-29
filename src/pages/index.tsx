@@ -49,7 +49,7 @@ const IndexPage: React.FC = () => {
       {data.allContentfulReview.edges.length && (
         <Grid>
           {data.allContentfulReview.edges.slice(0, 3).map(({ node }) => (
-            <AlbumFeature album={node}></AlbumFeature>
+            <AlbumFeature album={node} key={node.slug}></AlbumFeature>
           ))}
         </Grid>
       )}

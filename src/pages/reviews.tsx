@@ -7,38 +7,45 @@ import { Input } from '../components/input';
 import { Box } from '../components/box';
 import { Text } from '../components/text';
 
-const Reviews: React.FC = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      allContentfulReview {
-        edges {
-          node {
-            albumName
-            artistName
-            rating
-            slug
-            coverArt {
-              file {
-                url
-              }
+const useFilter = (data, criteria: string) => {
+  const [albums, setAlbums] = React.useState(data);
+
+  React.useEffect(() => {
+    const displayedAlbums = data.filter(
+      ({ node }) =>
+        node.albumName.toLowerCase().includes(criteria.toLowerCase()) ||
+        node.artistName.toLowerCase().includes(criteria.toLowerCase())
+    );
+    setAlbums(displayedAlbums);
+  }, [criteria, data]);
+
+  return albums;
+};
+
+const query = graphql`
+  query {
+    allContentfulReview {
+      edges {
+        node {
+          albumName
+          artistName
+          rating
+          slug
+          coverArt {
+            file {
+              url
             }
           }
         }
       }
     }
-  `);
+  }
+`;
 
-  const [albums, setAlbums] = React.useState(data.allContentfulReview.edges);
+const Reviews: React.FC = () => {
+  const data = useStaticQuery(query);
   const [filterValue, setFilterValue] = React.useState('');
-
-  React.useEffect(() => {
-    const displayedAlbums = data.allContentfulReview.edges.filter(
-      ({ node }) =>
-        node.albumName.toLowerCase().includes(filterValue.toLowerCase()) ||
-        node.artistName.toLowerCase().includes(filterValue.toLowerCase())
-    );
-    setAlbums(displayedAlbums);
-  }, [filterValue, data]);
+  const albums = useFilter(data.allContentfulReview.edges, filterValue);
 
   return (
     <Layout>
@@ -58,7 +65,7 @@ const Reviews: React.FC = () => {
         showing {albums.length} of {data.allContentfulReview.edges.length}
       </Text>
       {albums.map(({ node }) => (
-        <AlbumRow album={node} />
+        <AlbumRow album={node} key={node.slug} />
       ))}
     </Layout>
   );

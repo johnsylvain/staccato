@@ -58,9 +58,8 @@ const Arrow = () => (
 );
 
 export const AlbumRow: React.FC<AlbumRowProps> = ({ album }) => {
-  console.log(album);
   return (
-    <AlbumRowContainer to={album.slug}>
+    <AlbumRowContainer to={`/${album.slug}`}>
       <Image src={album.coverArt.file.url} />
       <AlbumRowContent>
         <Text bold mb={1}>

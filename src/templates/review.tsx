@@ -5,7 +5,7 @@ import { SEO } from '../components/seo';
 import { Text } from '../components/text';
 
 const Review: React.FC<{ data: any }> = ({ data }) => {
-  console.log(data)
+  console.log(data);
   return (
     <Layout>
       <SEO title={data.contentfulReview.albumName} />
@@ -18,7 +18,7 @@ const Review: React.FC<{ data: any }> = ({ data }) => {
 
 export const query = graphql`
   query($pathSlug: String!) {
-    contentfulReview(slug: {eq: $pathSlug}) {
+    contentfulReview(slug: { eq: $pathSlug }) {
       albumName
       artistName
       rating

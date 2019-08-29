@@ -49,7 +49,7 @@ const ReviewBadge = styled.div`
 
 export const AlbumFeature: React.FC<AlbumFeatureProps> = ({ album }) => {
   return (
-    <Container to={album.slug}>
+    <Container to={`/${album.slug}`}>
       <Image src={`http:${album.coverArt.file.url}`} />
       <AlbumDetails>
         <div>
