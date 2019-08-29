@@ -31,9 +31,10 @@ const font = {
     black: 900,
   },
   size: {
-    sm: '10px',
-    md: '14px',
-    lg: '18px',
+    xs: '10px',
+    sm: '12px',
+    md: '16px',
+    lg: '20px',
     xl: '28px',
   },
 };

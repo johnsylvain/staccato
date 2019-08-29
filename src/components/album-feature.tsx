@@ -17,19 +17,19 @@ const Container = styled.div`
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
+  background-color: #f3f0ed;
 `;
 
 const AlbumDetails = styled.div`
   padding: ${props => props.theme.spacing.md};
-  background-color: #f3f0ed;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
 const ReviewBadge = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 43px;
+  height: 43px;
   border-radius: 10px;
   background: #ece7e2;
   display: flex;
@@ -43,13 +43,13 @@ export const AlbumFeature: React.FC<AlbumFeatureProps> = ({ album }) => {
       <Image src={`http:${album.coverArt.file.url}`} />
       <AlbumDetails>
         <div>
-          <Text bold fontSize="lg">
+          <Text bold fontSize={3} mb={1}>
             {album.albumName}
           </Text>
           <Text>by {album.artistName}</Text>
         </div>
         <ReviewBadge>
-          <Text bold fontSize="lg">
+          <Text bold fontSize={3}>
             {album.rating}
           </Text>
         </ReviewBadge>

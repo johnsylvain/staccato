@@ -41,7 +41,7 @@ const IndexPage: React.FC = () => {
   return (
     <Layout>
       <SEO title="Home" />
-      <Text my={5} fontSize={3} bold align="center">
+      <Text my={5} fontSize={4} bold align="center">
         {data.site.siteMetadata.description}
       </Text>
       {data.allContentfulReview.edges.length && (
