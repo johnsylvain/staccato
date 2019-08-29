@@ -42,6 +42,9 @@ const Reviews: React.FC = () => {
   return (
     <Layout>
       <SEO title="reviews" />
+      <Text my={5} fontSize={4} bold align="center">
+        All reviews.
+      </Text>
       <Box my={5}>
         <Input
           type="text"

@@ -18,6 +18,13 @@ const Container = styled.div`
   overflow: hidden;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
   background-color: #f3f0ed;
+  transition: 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 13px 30px rgba(0, 0, 0, 0.09);
+    transform: translateY(-4px);
+  }
 `;
 
 const AlbumDetails = styled.div`

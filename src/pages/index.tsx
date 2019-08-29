@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, Link } from 'gatsby';
 import styled from 'styled-components';
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
 import { Text } from '../components/text';
 import { AlbumFeature } from '../components/album-feature';
+import { Button } from '../components/button';
 
 const Grid = styled.div`
   display: grid;
@@ -51,6 +52,9 @@ const IndexPage: React.FC = () => {
           ))}
         </Grid>
       )}
+      <Button>
+        <Text bold>see more</Text>
+      </Button>
     </Layout>
   );
 };

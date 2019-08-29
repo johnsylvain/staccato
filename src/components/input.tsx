@@ -10,7 +10,7 @@ export const Input = styled.input`
   border: none;
   padding: ${props => props.theme.spacing.md};
   width: 100%;
-  opacity: 0.8;
+  opacity: 0.7;
 
   &:focus {
     opacity: 1;
