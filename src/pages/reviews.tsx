@@ -16,6 +16,7 @@ const Reviews: React.FC = () => {
             albumName
             artistName
             rating
+            slug
             coverArt {
               file {
                 url

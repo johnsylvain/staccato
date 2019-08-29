@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Text } from './text';
+import { Link } from 'gatsby';
 
 type AlbumFeatureProps = {
   album: any;
@@ -13,13 +14,15 @@ const Image = styled.div<{ src: string }>`
   background-size: cover;
 `;
 
-const Container = styled.div`
+const Container = styled(Link)`
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
   background-color: #f3f0ed;
   transition: 0.2s ease;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 
   &:hover {
     box-shadow: 0px 13px 30px rgba(0, 0, 0, 0.09);
@@ -46,7 +49,7 @@ const ReviewBadge = styled.div`
 
 export const AlbumFeature: React.FC<AlbumFeatureProps> = ({ album }) => {
   return (
-    <Container>
+    <Container to={album.slug}>
       <Image src={`http:${album.coverArt.file.url}`} />
       <AlbumDetails>
         <div>

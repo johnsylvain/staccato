@@ -5,7 +5,7 @@ import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
 import { Text } from '../components/text';
 import { AlbumFeature } from '../components/album-feature';
-import { Button } from '../components/button';
+import { Button, ButtonLink } from '../components/button';
 
 const Grid = styled.div`
   display: grid;
@@ -28,6 +28,7 @@ const IndexPage: React.FC = () => {
             albumName
             artistName
             rating
+            slug
             coverArt {
               file {
                 url
@@ -52,9 +53,9 @@ const IndexPage: React.FC = () => {
           ))}
         </Grid>
       )}
-      <Button>
+      <ButtonLink to="/reviews">
         <Text bold>see more</Text>
-      </Button>
+      </ButtonLink>
     </Layout>
   );
 };

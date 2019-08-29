@@ -8,12 +8,14 @@ type AlbumRowProps = {
 };
 
 const AlbumRowContainer = styled(Link)`
-  display:block;
+  display: block;
   border-radius: 10px;
   padding: ${props => props.theme.spacing.md};
   display: flex;
   align-items: center;
   cursor: pointer;
+  color: inherit;
+  text-decoration: none;
 
   & > svg {
     opacity: 0;
@@ -56,8 +58,9 @@ const Arrow = () => (
 );
 
 export const AlbumRow: React.FC<AlbumRowProps> = ({ album }) => {
+  console.log(album);
   return (
-    <AlbumRowContainer>
+    <AlbumRowContainer to={album.slug}>
       <Image src={album.coverArt.file.url} />
       <AlbumRowContent>
         <Text bold mb={1}>
