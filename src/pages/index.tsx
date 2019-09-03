@@ -22,7 +22,7 @@ const IndexPage: React.FC = () => {
           description
         }
       }
-      allContentfulReview {
+      allContentfulReview(sort: { order: DESC, fields: createdAt }, limit: 3) {
         edges {
           node {
             albumName

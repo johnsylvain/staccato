@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     background: linear-gradient(to right, ${props =>
       props.theme.colors.offWhite}, ${props => props.theme.colors.white});
     font-family: ${props => props.theme.font.family};
@@ -22,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Container = styled.div`
-  max-width: ${props => props.theme.breakpoints.lg}px;
+  max-width: ${props => props.theme.breakpoint.lg}px;
   padding: 0 ${props => props.theme.spacing.md};
   margin: 0 auto;
   display: flex;

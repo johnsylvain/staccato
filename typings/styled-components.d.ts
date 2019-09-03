@@ -19,11 +19,13 @@ declare module 'styled-components' {
 
     space: string[];
 
-    breakpoints: {
+    breakpoint: {
       sm: number;
       md: number;
       lg: number;
     };
+
+    breakpoints: string[];
 
     font: {
       family: string;

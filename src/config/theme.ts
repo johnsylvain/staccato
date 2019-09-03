@@ -10,14 +10,14 @@ const spacing = {
   xl: `${spacingUnit * 6}px`,
 };
 
-const breakpoints = {
+const breakpoint = {
   sm: 480,
   md: 768,
-  lg: 1000,
+  lg: 900,
 };
 
 const colors = {
-  white: '#FFFFFF',
+  white: '#FBFAF9',
   offWhite: '#E5D9D9',
   text: '#2c2c2c',
 };
@@ -42,6 +42,7 @@ const font = {
 // styped-system theme
 const fontSizes = Object.keys(font.size).map(key => font.size[key]);
 const space = ['0px', ...Object.keys(spacing).map(key => spacing[key])];
+const breakpoints = Object.keys(breakpoint).map(key => breakpoint[key] + 'px');
 
 export const theme: DefaultTheme = {
   colors,
@@ -49,5 +50,6 @@ export const theme: DefaultTheme = {
   fontSizes,
   spacing,
   breakpoints,
+  breakpoint,
   space,
 };

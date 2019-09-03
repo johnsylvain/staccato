@@ -24,7 +24,7 @@ const useFilter = (data, criteria: string) => {
 
 const query = graphql`
   query {
-    allContentfulReview {
+    allContentfulReview(sort: { order: DESC, fields: createdAt }) {
       edges {
         node {
           albumName

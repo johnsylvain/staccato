@@ -23,3 +23,5 @@ export const Text = styled.div<TextProps>`
     bold ? theme.font.weight.bold : theme.font.weight.normal};
   text-align: ${({ align }) => (align ? align : 'left')};
 `;
+
+export const Span = Text.withComponent('span')
