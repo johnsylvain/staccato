@@ -24,4 +24,5 @@ export const Text = styled.div<TextProps>`
   text-align: ${({ align }) => (align ? align : 'left')};
 `;
 
-export const Span = Text.withComponent('span')
+export const Span = Text.withComponent('span');
+export const A = Text.withComponent('a');

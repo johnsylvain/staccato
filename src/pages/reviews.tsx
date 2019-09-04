@@ -55,7 +55,6 @@ const Reviews: React.FC = () => {
       </Text>
       <Box my={5}>
         <Input
-          type="text"
           value={filterValue}
           onChange={event => setFilterValue(event.target.value)}
           placeholder="Search for a review"

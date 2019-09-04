@@ -1,37 +1,36 @@
 import * as React from 'react';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
-import { BLOCKS, MARKS } from '@contentful/rich-text-types';
-import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
-import { Text, Span } from '../components/text';
+import { Text, Span, A } from '../components/text';
 import { Box, Flex } from '../components/box';
+import { renderRichText } from '../util/rich-text';
 
-const options: Options = {
-  renderMark: {
-    [MARKS.BOLD]: text => <Span bold>{text}</Span>,
-  },
-  renderNode: {
-    [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
-  },
-};
+const Card = styled(Box)`
+  background: #f5f2f2;
+  border-radius: 10px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
+`;
 
-const Image = styled.div<{ src: string }>`
+const Image = styled(Box) <{ src: string }>`
   border-radius: 10px;
   width: 100%;
   padding-bottom: 100%;
   background: url(${props => props.src});
   background-size: cover;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
+  top: -70px;
+  position: relative;
+  margin-bottom: -70px;
 `;
 
 const ReviewBadge = styled.div`
   width: 43px;
   height: 43px;
   border-radius: 10px;
-  background: ${props => props.theme.colors.text};
-  color: white;
+  background: rgba(0, 0, 0, 0.06);
+  color: ${props => props.theme.colors.text};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,27 +38,37 @@ const ReviewBadge = styled.div`
 
 const FullReview: React.FC<{ album: any }> = ({ album }) => {
   return (
-    <Flex>
-      <Box width={[1, 1, 1 / 4]}>
-        <Image src={`http:${album.coverArt.file.url}`} />
-      </Box>
-      <Box px={4} width={[1, 1, 3 / 4]}>
-        <Flex >
-          <Box flex="1 1 auto">
-            <Text fontSize={3} bold mb={1}>
-              {album.albumName}
-            </Text>
-            <Text>by {album.artistName}</Text>
-          </Box>
-          <ReviewBadge>
-            <Text bold>{album.rating}</Text>
-          </ReviewBadge>
-        </Flex>
-        <Box py={3}>
-          {documentToReactComponents(album.body.json, options)}
+    <Card mt={5} p={4} width={1}>
+      <Flex>
+        <Box width={[1, 1, 1 / 3]}>
+          <Image src={`http:${album.coverArt.file.url}`} />
         </Box>
-      </Box>
-    </Flex>
+        <Flex flexDirection="column" width={[1, 1, 2 / 3]} pl={[0, 0, 4]} mt={[4, 4, 0]}>
+          <Flex>
+            <Box flex="1 1 auto">
+              <Text fontSize={4} bold mb={1}>
+                {album.albumName}
+              </Text>
+              <Text mb={2}>by {album.artistName}</Text>
+            </Box>
+            <ReviewBadge>
+              <Text bold>{album.rating}</Text>
+            </ReviewBadge>
+          </Flex>
+          <Text fontSize={1} color="subtext">
+            {album.label} <Span mx={1}>-</Span> {album.releaseDate}
+          </Text>
+          <Box py={3} flex="1 1 auto">{renderRichText(album.body.json)}</Box>
+
+          <Flex justifyContent="space-between">
+            <Text fontSize={1} color="subtext">
+              written by <Span bold>{album.author.name}</Span>
+            </Text>
+            <A href={album.spotify} target="_blank" bold color="subtext" fontSize={1}>Listen on Spotify</A>
+          </Flex>
+        </Flex>
+      </Flex>
+    </Card>
   );
 };
 
@@ -78,12 +87,23 @@ export const query = graphql`
       albumName
       artistName
       rating
+      label
+      releaseDate(formatString: "YYYY")
       body {
         json
       }
       coverArt {
         file {
           url
+        }
+      }
+      spotify
+      author {
+        name
+        avatar {
+          file {
+            url
+          }
         }
       }
     }

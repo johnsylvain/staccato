@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Input = styled.input`
+export const Input = styled.input.attrs({ type: 'text' })`
   font-size: inherit;
   background: rgba(0, 0, 0, 0.06);
   color: ${props => props.theme.colors.text};

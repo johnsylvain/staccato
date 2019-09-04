@@ -5,13 +5,17 @@ import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
 import { Text } from '../components/text';
 import { AlbumFeature } from '../components/album-feature';
-import { Button, ButtonLink } from '../components/button';
+import { ButtonLink } from '../components/button';
 
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: ${props => props.theme.spacing.lg};
   margin: ${props => props.theme.spacing.xl} 0;
+
+  @media (max-width: ${props => props.theme.breakpoint.md}px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const IndexPage: React.FC = () => {

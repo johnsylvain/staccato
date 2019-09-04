@@ -13,13 +13,15 @@ const spacing = {
 const breakpoint = {
   sm: 480,
   md: 768,
-  lg: 900,
+  lg: 1100,
 };
 
 const colors = {
   white: '#FBFAF9',
   offWhite: '#E5D9D9',
+  seagreen: '#eef3e1',
   text: '#2c2c2c',
+  subtext: '#6d6d6d',
 };
 
 const font = {

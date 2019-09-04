@@ -6,7 +6,9 @@ declare module 'styled-components' {
     colors: {
       white: string;
       offWhite: string;
+      seagreen: string;
       text: string;
+      subtext: string;
     };
 
     spacing: {

@@ -16,4 +16,5 @@ export const Box = styled.div<SpaceProps & LayoutProps & FlexboxProps>`
 
 export const Flex = styled(Box)`
   display: flex;
+  flex-wrap: wrap;
 `;
