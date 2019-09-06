@@ -18,7 +18,7 @@ const Container = styled(Link)`
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
-  background-color: #f3f0ed;
+  background: rgba(255, 255, 255, 0.5);
   transition: 0.2s ease;
   cursor: pointer;
   text-decoration: none;

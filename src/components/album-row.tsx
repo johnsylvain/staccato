@@ -17,15 +17,12 @@ const AlbumRowContainer = styled(Link)`
   cursor: pointer;
   color: inherit;
   text-decoration: none;
+  background: rgba(0, 0, 0, 0.06);
 
   & > svg {
     opacity: 0;
     transform: translateX(10px);
     transition: 0.2s ease;
-  }
-
-  &:nth-of-type(odd) {
-    background: rgba(0, 0, 0, 0.06);
   }
 
   &:hover > svg {

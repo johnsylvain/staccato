@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'gatsby';
 
 const StyledNav = styled.nav`
-  padding: ${props => props.theme.spacing.lg} 0;
+  padding: ${props => props.theme.spacing.xl} 0;
 
   > ul {
     display: flex;

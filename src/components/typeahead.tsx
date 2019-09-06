@@ -12,16 +12,19 @@ type TypeaheadProps = React.HTMLAttributes<HTMLInputElement> & {
 
 const TypeaheadWrapper = styled.div`
   position: relative;
+  perspective: 1000px;
 `;
 
 const TypeaheadDropdown = styled(animated.div)`
   position: absolute;
+  z-index: 1000;
   top: 120%;
   background: white;
   padding: 10px;
   border-radius: 10px;
   width: 100%;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
+  transform-origin: top center;
 `;
 
 export const Typeahead: React.FC<TypeaheadProps> = ({
@@ -30,24 +33,46 @@ export const Typeahead: React.FC<TypeaheadProps> = ({
   children,
   ...rest
 }) => {
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const [value, setValue] = React.useState<string>('');
+  const [active, setActive] = React.useState<boolean>(false);
   const [filteredOptions, setFilteredOptions] = React.useState<any>(options);
-  const transitions = useTransition(!!value.length, null, {
-    from: { opacity: 0, transform: 'translateY(-10px)' },
-    enter: { opacity: 1, transform: 'translateY(0px)' },
-    leave: { opacity: 0, transform: 'translateY(-10px)' },
+  const transitions = useTransition(active && !!value.length, null, {
+    from: { opacity: 0, transform: 'rotateX(-20deg)' },
+    enter: { opacity: 1, transform: 'rotateX(0deg)' },
+    leave: { opacity: 0, transform: 'rotateX(-20deg)' },
   })
 
   React.useEffect(() => {
-    setFilteredOptions(options.filter(option => filterBy(option, value)));
+    setFilteredOptions(options.filter(option => filterBy(option, value.trim())));
   }, [value, options]);
+
+  React.useEffect(() => {
+    const handler = (event: any) => {
+      if (!inputRef.current.contains(event.target)) {
+        setActive(false)
+      }
+    }
+
+    ['click', 'touchstart'].forEach(method => {
+      window.addEventListener(method, handler)
+    })
+
+    return () => {
+      ['click', 'touchstart'].forEach(method => {
+        window.removeEventListener(method, handler)
+      })
+    }
+  }, [inputRef])
 
   return (
     <TypeaheadWrapper>
       <Input
+        ref={inputRef}
         small
         value={value}
         onChange={event => setValue(event.target.value)}
+        onClick={() => setActive(true)}
         {...rest}
       />
       {transitions.map(({ props, key, item }) => item &&

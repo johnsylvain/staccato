@@ -3,24 +3,8 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
 import { AlbumRow } from '../components/album-row';
-import { Input } from '../components/input';
-import { Box } from '../components/box';
 import { Text } from '../components/text';
-
-const useFilter = (data, criteria: string) => {
-  const [albums, setAlbums] = React.useState(data);
-
-  React.useEffect(() => {
-    const displayedAlbums = data.filter(
-      ({ node }) =>
-        node.albumName.toLowerCase().includes(criteria.toLowerCase()) ||
-        node.artistName.toLowerCase().includes(criteria.toLowerCase())
-    );
-    setAlbums(displayedAlbums);
-  }, [criteria, data]);
-
-  return albums;
-};
+import styled from 'styled-components';
 
 const query = graphql`
   query {
@@ -42,10 +26,14 @@ const query = graphql`
   }
 `;
 
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: ${props => props.theme.spacing.md}
+`
+
 const Reviews: React.FC = () => {
   const data = useStaticQuery(query);
-  const [filterValue, setFilterValue] = React.useState('');
-  const albums = useFilter(data.allContentfulReview.edges, filterValue);
 
   return (
     <Layout>
@@ -53,19 +41,11 @@ const Reviews: React.FC = () => {
       <Text my={5} fontSize={4} bold align="center">
         All reviews.
       </Text>
-      <Box my={5}>
-        <Input
-          value={filterValue}
-          onChange={event => setFilterValue(event.target.value)}
-          placeholder="Search for a review"
-        />
-      </Box>
-      <Text fontSize={2} bold mb={3}>
-        showing {albums.length} of {data.allContentfulReview.edges.length}
-      </Text>
-      {albums.map(({ node }) => (
-        <AlbumRow album={node} key={node.slug} />
-      ))}
+      <Grid>
+        {data.allContentfulReview.edges.map(({ node }) => (
+          <AlbumRow album={node} key={node.slug} />
+        ))}
+      </Grid>
     </Layout>
   );
 };

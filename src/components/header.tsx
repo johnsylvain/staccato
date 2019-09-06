@@ -54,7 +54,7 @@ export const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
             }
           >
             {(option: any) => (
-              <Box p={2}>
+              <Box p={3}>
                 <Link to={`/${option.node.slug}`}>
                   <Text bold mb={1} color="text">
                     {option.node.albumName}
