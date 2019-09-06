@@ -22,6 +22,7 @@ const colors = {
   seagreen: '#eef3e1',
   text: '#2c2c2c',
   subtext: '#6d6d6d',
+  spotify: '#1DB954',
 };
 
 const font = {

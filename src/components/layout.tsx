@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
   html {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     background: linear-gradient(to right, ${props =>
-    props.theme.colors.offWhite}, ${props => props.theme.colors.seagreen});
+      props.theme.colors.offWhite}, ${props => props.theme.colors.seagreen});
     font-family: ${props => props.theme.font.family};
     color: ${props => props.theme.colors.text};
   }
@@ -57,7 +57,9 @@ export const Layout: React.FC = ({ children }) => {
         <Header siteTitle={data.site.siteMetadata.title} />
         <Main>{children}</Main>
         <Footer>
-          <Text fontSize={1} color="subtext">© {new Date().getFullYear()} staccato</Text>
+          <Text fontSize={1} color="subtext">
+            © {new Date().getFullYear()} staccato
+          </Text>
         </Footer>
       </Container>
     </ThemeProvider>

@@ -1,4 +1,13 @@
-import styled from 'styled-components';
+import styled, { StyledProps, css } from 'styled-components';
+
+type InputProps = { small?: boolean };
+
+const small = (props: StyledProps<InputProps>) =>
+  props.small &&
+  css`
+    padding: ${props => props.theme.spacing.sm}
+      ${props => props.theme.spacing.md};
+  `;
 
 export const Input = styled.input.attrs({ type: 'text' })`
   font-size: inherit;
@@ -11,6 +20,8 @@ export const Input = styled.input.attrs({ type: 'text' })`
   padding: ${props => props.theme.spacing.md};
   width: 100%;
   opacity: 0.7;
+
+  ${small}
 
   &:focus {
     opacity: 1;

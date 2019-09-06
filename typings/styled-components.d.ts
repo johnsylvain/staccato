@@ -9,6 +9,7 @@ declare module 'styled-components' {
       seagreen: string;
       text: string;
       subtext: string;
+      spotify: string;
     };
 
     spacing: {

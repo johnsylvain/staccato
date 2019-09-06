@@ -13,7 +13,7 @@ const Card = styled(Box)`
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
 `;
 
-const Image = styled(Box) <{ src: string }>`
+const Image = styled(Box)<{ src: string }>`
   border-radius: 10px;
   width: 100%;
   padding-bottom: 100%;
@@ -43,7 +43,12 @@ const FullReview: React.FC<{ album: any }> = ({ album }) => {
         <Box width={[1, 1, 1 / 3]}>
           <Image src={`http:${album.coverArt.file.url}`} />
         </Box>
-        <Flex flexDirection="column" width={[1, 1, 2 / 3]} pl={[0, 0, 4]} mt={[4, 4, 0]}>
+        <Flex
+          flexDirection="column"
+          width={[1, 1, 2 / 3]}
+          pl={[0, 0, 4]}
+          mt={[4, 4, 0]}
+        >
           <Flex>
             <Box flex="1 1 auto">
               <Text fontSize={4} bold mb={1}>
@@ -58,13 +63,23 @@ const FullReview: React.FC<{ album: any }> = ({ album }) => {
           <Text fontSize={1} color="subtext">
             {album.label} <Span mx={1}>-</Span> {album.releaseDate}
           </Text>
-          <Box py={3} flex="1 1 auto">{renderRichText(album.body.json)}</Box>
+          <Box py={3} flex="1 1 auto">
+            {renderRichText(album.body.json)}
+          </Box>
 
           <Flex justifyContent="space-between">
             <Text fontSize={1} color="subtext">
-              written by <Span bold>{album.author.name}</Span>
+              written by {album.author.name}
             </Text>
-            <A href={album.spotify} target="_blank" bold color="subtext" fontSize={1}>Listen on Spotify</A>
+            <A
+              href={album.spotify}
+              target="_blank"
+              bold
+              color="spotify"
+              fontSize={1}
+            >
+              Listen on Spotify
+            </A>
           </Flex>
         </Flex>
       </Flex>

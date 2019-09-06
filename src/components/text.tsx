@@ -26,3 +26,6 @@ export const Text = styled.div<TextProps>`
 
 export const Span = Text.withComponent('span');
 export const A = Text.withComponent('a');
+export const P = Text.withComponent('p');
+export const H1 = Text.withComponent('h1');
+export const H2 = Text.withComponent('h2');
