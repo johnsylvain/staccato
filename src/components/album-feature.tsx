@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Text } from './text';
 import { Link } from 'gatsby';
+import { animated, useSpring } from 'react-spring';
 
 type AlbumFeatureProps = {
   album: any;
@@ -23,11 +24,7 @@ const Container = styled(Link)`
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-
-  &:hover {
-    box-shadow: 0px 13px 30px rgba(0, 0, 0, 0.09);
-    transform: translateY(-4px);
-  }
+  display: block;
 `;
 
 const AlbumDetails = styled.div`
@@ -47,23 +44,33 @@ const ReviewBadge = styled.div`
   justify-content: center;
 `;
 
+const calc = (x: number, y: number) => [-(y - window.innerHeight / 2) / 50, (x - window.innerWidth / 2) / 50, 1.05]
+const trans = ([x, y, s]: number[]) => `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
+
 export const AlbumFeature: React.FC<AlbumFeatureProps> = ({ album }) => {
+  const [props, set] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }))
   return (
-    <Container to={`/${album.slug}`}>
-      <Image src={`http:${album.coverArt.file.url}`} />
-      <AlbumDetails>
-        <div>
-          <Text bold fontSize={3} mb={1}>
-            {album.albumName}
-          </Text>
-          <Text>by {album.artistName}</Text>
-        </div>
-        <ReviewBadge>
-          <Text bold fontSize={3}>
-            {album.rating}
-          </Text>
-        </ReviewBadge>
-      </AlbumDetails>
-    </Container>
+    <animated.div
+      onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
+      onMouseLeave={() => set({ xys: [0, 0, 1] })}
+      style={{ transform: props.xys.interpolate((x, y, s) => trans([x, y, s])) }}
+    >
+      <Container to={`/${album.slug}`}>
+        <Image src={`http:${album.coverArt.file.url}`} />
+        <AlbumDetails>
+          <div>
+            <Text bold fontSize={3} mb={1}>
+              {album.albumName}
+            </Text>
+            <Text>by {album.artistName}</Text>
+          </div>
+          <ReviewBadge>
+            <Text bold fontSize={3}>
+              {album.rating}
+            </Text>
+          </ReviewBadge>
+        </AlbumDetails>
+      </Container>
+    </animated.div>
   );
 };
