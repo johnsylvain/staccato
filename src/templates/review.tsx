@@ -96,7 +96,11 @@ const FullReview: React.FC<{ album: any }> = ({ album }) => {
 const Review: React.FC<{ data: any }> = ({ data }) => {
   return (
     <Layout>
-      <SEO title={data.contentfulReview.albumName} />
+      <SEO
+        title={data.contentfulReview.albumName}
+        description={`Review of ${data.contentfulReview.albumName} by ${data.contentfulReview.artistName}`}
+        image={'http:' + data.contentfulReview.coverArt.fluid.src}
+      />
       <FullReview album={data.contentfulReview} />
     </Layout>
   );

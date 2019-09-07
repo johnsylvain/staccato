@@ -8,7 +8,7 @@ type Breakpoints = { [key in BreakpointKeys]?: string };
 const queries: Breakpoints = Object.keys(theme.breakpoint).reduce(
   (accumulator: Breakpoints, key: BreakpointKeys): Breakpoints => ({
     ...accumulator,
-    [key]: `(min-width: ${theme.breakpoint[key]}px)`
+    [key]: `(min-width: ${theme.breakpoint[key]}px)`,
   }),
   {}
 );

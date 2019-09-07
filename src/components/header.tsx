@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
             <NavItem to="/about">about</NavItem>
           </Nav>
         </Box>
-        {isSmallScreen &&
+        {isSmallScreen && (
           <Box width={300}>
             <Typeahead
               placeholder="Search for a review"
@@ -48,7 +48,9 @@ export const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                 option.node.artistName
                   .toLowerCase()
                   .includes(value.toLowerCase()) ||
-                option.node.albumName.toLowerCase().includes(value.toLowerCase())
+                option.node.albumName
+                  .toLowerCase()
+                  .includes(value.toLowerCase())
               }
             >
               {(option: any) => (
@@ -63,7 +65,7 @@ export const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
               )}
             </Typeahead>
           </Box>
-        }
+        )}
       </Flex>
     </header>
   );
