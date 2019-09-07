@@ -1,6 +1,12 @@
 {
   "compilerOptions": {
-    "jsx": "react"
+    "jsx": "react",
+    "lib": [
+      "dom"
+    ]
   },
-  "include": ["src", "typings"]
+  "include": [
+    "src",
+    "typings"
+  ]
 }
