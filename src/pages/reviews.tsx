@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import styled from 'styled-components';
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
 import { AlbumRow } from '../components/album-row';
 import { Text } from '../components/text';
-import styled from 'styled-components';
 
 const query = graphql`
   query {
@@ -16,8 +16,8 @@ const query = graphql`
           rating
           slug
           coverArt {
-            file {
-              url
+            fluid(maxWidth: 50, maxHeight: 50) {
+              ...GatsbyContentfulFluid
             }
           }
         }
@@ -29,8 +29,8 @@ const query = graphql`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: ${props => props.theme.spacing.md}
-`
+  grid-gap: ${props => props.theme.spacing.md};
+`;
 
 const Reviews: React.FC = () => {
   const data = useStaticQuery(query);
@@ -43,7 +43,7 @@ const Reviews: React.FC = () => {
       </Text>
       <Grid>
         {data.allContentfulReview.edges.map(({ node }) => (
-          <AlbumRow album={node} key={node.slug} />
+          <AlbumRow album={node} key={node.slug}></AlbumRow>
         ))}
       </Grid>
     </Layout>

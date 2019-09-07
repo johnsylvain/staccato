@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { useTransition, animated } from 'react-spring'
+import { useTransition, animated } from 'react-spring';
 import { Input } from './input';
 import { Text } from './text';
 
@@ -41,29 +41,31 @@ export const Typeahead: React.FC<TypeaheadProps> = ({
     from: { opacity: 0, transform: 'rotateX(-20deg)' },
     enter: { opacity: 1, transform: 'rotateX(0deg)' },
     leave: { opacity: 0, transform: 'rotateX(-20deg)' },
-  })
+  });
 
   React.useEffect(() => {
-    setFilteredOptions(options.filter(option => filterBy(option, value.trim())));
+    setFilteredOptions(
+      options.filter(option => filterBy(option, value.trim()))
+    );
   }, [value, options]);
 
   React.useEffect(() => {
     const handler = (event: any) => {
       if (!inputRef.current.contains(event.target)) {
-        setActive(false)
+        setActive(false);
       }
-    }
+    };
 
     ['click', 'touchstart'].forEach(method => {
-      window.addEventListener(method, handler)
-    })
+      window.addEventListener(method, handler);
+    });
 
     return () => {
       ['click', 'touchstart'].forEach(method => {
-        window.removeEventListener(method, handler)
-      })
-    }
-  }, [inputRef])
+        window.removeEventListener(method, handler);
+      });
+    };
+  }, [inputRef]);
 
   return (
     <TypeaheadWrapper>
@@ -75,16 +77,19 @@ export const Typeahead: React.FC<TypeaheadProps> = ({
         onClick={() => setActive(true)}
         {...rest}
       />
-      {transitions.map(({ props, key, item }) => item &&
-        <TypeaheadDropdown style={props} key={key}>
-          {filteredOptions.length ? (
-            filteredOptions.slice(0, 5).map(option => children(option))
-          ) : (
-              <Text p={3} align="center" color="subtext">
-                No reviews found.
-            </Text>
-            )}
-        </TypeaheadDropdown>
+      {transitions.map(
+        ({ props, key, item }) =>
+          item && (
+            <TypeaheadDropdown style={props} key={key}>
+              {filteredOptions.length ? (
+                filteredOptions.slice(0, 5).map(option => children(option))
+              ) : (
+                <Text p={3} align="center" color="subtext">
+                  No reviews found.
+                </Text>
+              )}
+            </TypeaheadDropdown>
+          )
       )}
     </TypeaheadWrapper>
   );

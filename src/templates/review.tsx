@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
+import Image from 'gatsby-image'
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
 import { Text, Span, A } from '../components/text';
@@ -13,12 +14,10 @@ const Card = styled(Box)`
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
 `;
 
-const Image = styled(Box)<{ src: string }>`
+const ImageWrapper = styled(Box)`
   border-radius: 10px;
   width: 100%;
-  padding-bottom: 100%;
-  background: url(${props => props.src});
-  background-size: cover;
+  overflow: hidden;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
   top: -70px;
   position: relative;
@@ -40,9 +39,9 @@ const FullReview: React.FC<{ album: any }> = ({ album }) => {
   return (
     <Card mt={5} p={4} width={1}>
       <Flex>
-        <Box width={[1, 1, 1 / 3]}>
-          <Image src={`http:${album.coverArt.file.url}`} />
-        </Box>
+        <ImageWrapper width={[1, 1, 1 / 3]}>
+          <Image fluid={album.coverArt.fluid}></Image>
+        </ImageWrapper>
         <Flex
           flexDirection="column"
           width={[1, 1, 2 / 3]}
@@ -108,18 +107,13 @@ export const query = graphql`
         json
       }
       coverArt {
-        file {
-          url
+        fluid(maxWidth: 500, maxHeight: 500) {
+          ...GatsbyContentfulFluid
         }
       }
       spotify
       author {
         name
-        avatar {
-          file {
-            url
-          }
-        }
       }
     }
   }

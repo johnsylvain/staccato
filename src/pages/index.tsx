@@ -6,6 +6,7 @@ import { SEO } from '../components/seo';
 import { Text } from '../components/text';
 import { AlbumFeature } from '../components/album-feature';
 import { ButtonLink } from '../components/button';
+import { Tilt } from '../components/tilt';
 
 const Grid = styled.div`
   display: grid;
@@ -17,9 +18,6 @@ const Grid = styled.div`
     grid-template-columns: 1fr;
   }
 `;
-
-const calc = (x, y) => [-(y - window.innerHeight / 2) / 20, (x - window.innerWidth / 2) / 20, 1.1]
-const trans = (x, y, s) => `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
 
 const IndexPage: React.FC = () => {
   const data = useStaticQuery(graphql`
@@ -37,8 +35,8 @@ const IndexPage: React.FC = () => {
             rating
             slug
             coverArt {
-              file {
-                url
+              fluid(maxWidth: 500, maxHeight: 500) {
+                ...GatsbyContentfulFluid
               }
             }
           }
