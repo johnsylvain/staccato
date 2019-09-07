@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 type TiltProps = {
   [prop: string]: any;
@@ -11,6 +12,7 @@ const Container = styled.div`
 `;
 
 export const Tilt: React.FC<TiltProps> = ({ children }) => {
+  const isMediumScreen = useMediaQuery('md');
   const [props, set] = useSpring(() => ({
     xys: [0, 0, 1],
   }));
@@ -20,6 +22,8 @@ export const Tilt: React.FC<TiltProps> = ({ children }) => {
   return (
     <animated.div
       onMouseMove={(event: React.MouseEvent) => {
+        if (!isMediumScreen) return;
+
         const target = event.target as HTMLDivElement;
         set({
           xys: [

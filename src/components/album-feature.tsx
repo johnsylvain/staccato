@@ -39,7 +39,6 @@ const ReviewBadge = styled.div`
 `;
 
 export const AlbumFeature: React.FC<AlbumFeatureProps> = ({ album }) => {
-  console.log(album.coverArt.fluid);
   return (
     <Link to={`/${album.slug}`}>
       <Tilt>

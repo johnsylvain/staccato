@@ -18,7 +18,7 @@ const TypeaheadWrapper = styled.div`
 
 const TypeaheadDropdown = styled(animated.div)`
   position: absolute;
-  z-index: 1000;
+  z-index: 8000;
   top: 120%;
   background: white;
   padding: 10px;
@@ -39,6 +39,7 @@ const InputIcon = styled(Search)`
   left: 14px;
   font-size: 16px;
   color: ${props => props.theme.colors.subtext};
+  opacity: 0.8;
 `;
 
 export const Typeahead: React.FC<TypeaheadProps> = ({
@@ -52,9 +53,9 @@ export const Typeahead: React.FC<TypeaheadProps> = ({
   const [active, setActive] = React.useState<boolean>(false);
   const [filteredOptions, setFilteredOptions] = React.useState<any>(options);
   const transitions = useTransition(active && !!value.length, null, {
-    from: { opacity: 0, transform: 'rotateX(-20deg)' },
+    from: { opacity: 0, transform: 'rotateX(20deg)' },
     enter: { opacity: 1, transform: 'rotateX(0deg)' },
-    leave: { opacity: 0, transform: 'rotateX(-20deg)' },
+    leave: { opacity: 0, transform: 'rotateX(20deg)' },
   });
 
   React.useEffect(() => {
@@ -84,7 +85,6 @@ export const Typeahead: React.FC<TypeaheadProps> = ({
   return (
     <TypeaheadWrapper>
       <InputWrapper>
-        <InputIcon />
         <Input
           ref={inputRef}
           small
@@ -94,6 +94,7 @@ export const Typeahead: React.FC<TypeaheadProps> = ({
           style={{ paddingLeft: 40 }}
           {...rest}
         />
+        <InputIcon />
       </InputWrapper>
       {transitions.map(
         ({ props, key, item }) =>
@@ -102,10 +103,10 @@ export const Typeahead: React.FC<TypeaheadProps> = ({
               {filteredOptions.length ? (
                 filteredOptions.slice(0, 5).map(option => children(option))
               ) : (
-                <Text p={3} align="center" color="subtext">
-                  No reviews found.
+                  <Text p={3} align="center" color="subtext">
+                    No reviews found.
                 </Text>
-              )}
+                )}
             </TypeaheadDropdown>
           )
       )}

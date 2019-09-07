@@ -14,7 +14,7 @@ const Card = styled(Box)`
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
 `;
 
-const ImageWrapper = styled(Box)`
+const ImageWrapper = styled.div`
   border-radius: 10px;
   width: 100%;
   overflow: hidden;
@@ -39,9 +39,11 @@ const FullReview: React.FC<{ album: any }> = ({ album }) => {
   return (
     <Card mt={5} p={4} width={1}>
       <Flex>
-        <ImageWrapper width={[1, 1, 1 / 3]}>
-          <Image fluid={album.coverArt.fluid}></Image>
-        </ImageWrapper>
+        <Box width={[1, 1, 1 / 3]}>
+          <ImageWrapper>
+            <Image fluid={album.coverArt.fluid}></Image>
+          </ImageWrapper>
+        </Box>
         <Flex
           flexDirection="column"
           width={[1, 1, 2 / 3]}
@@ -66,10 +68,15 @@ const FullReview: React.FC<{ album: any }> = ({ album }) => {
             {renderRichText(album.body.json)}
           </Box>
 
-          <Flex justifyContent="space-between">
-            <Text fontSize={1} color="subtext">
-              written by {album.author.name}
-            </Text>
+          <Flex justifyContent="space-between" alignItems="flex-end">
+            <div>
+              <Text fontSize={1} color="subtext" mb={1}>
+                written by {album.author.name}
+              </Text>
+              <Text fontSize={1} color="subtext">
+                {album.createdAt}
+              </Text>
+            </div>
             <A
               href={album.spotify}
               target="_blank"
@@ -100,9 +107,9 @@ export const query = graphql`
     contentfulReview(slug: { eq: $pathSlug }) {
       albumName
       artistName
-      rating
-      label
-      releaseDate(formatString: "YYYY")
+      author {
+        name
+      }
       body {
         json
       }
@@ -111,10 +118,11 @@ export const query = graphql`
           ...GatsbyContentfulFluid
         }
       }
+      createdAt(formatString: "MMMM DD, YYYY")
+      label
+      rating
+      releaseDate(formatString: "YYYY")
       spotify
-      author {
-        name
-      }
     }
   }
 `;
