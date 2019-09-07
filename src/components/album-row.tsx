@@ -18,7 +18,7 @@ const AlbumRowContainer = styled.div`
   cursor: pointer;
   color: inherit;
   text-decoration: none;
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.3);
 `;
 
 const ImageWrapper = styled.div`
@@ -39,7 +39,6 @@ export const AlbumRow: React.FC<AlbumRowProps> = ({ album }) => {
       <Tilt>
         <AlbumRowContainer>
           <ImageWrapper>
-
             <Image fluid={album.coverArt.fluid} />
           </ImageWrapper>
           <AlbumRowContent>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
-import Image from 'gatsby-image'
+import Image from 'gatsby-image';
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
 import { Text, Span, A } from '../components/text';
@@ -9,7 +9,7 @@ import { Box, Flex } from '../components/box';
 import { renderRichText } from '../util/rich-text';
 
 const Card = styled(Box)`
-  background: #f5f2f2;
+  background: rgba(255, 250, 250, 0.5);
   border-radius: 10px;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
 `;
@@ -28,7 +28,7 @@ const ReviewBadge = styled.div`
   width: 43px;
   height: 43px;
   border-radius: 10px;
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(0, 0, 0, 0.05);
   color: ${props => props.theme.colors.text};
   display: flex;
   align-items: center;

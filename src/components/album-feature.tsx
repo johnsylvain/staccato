@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Text } from './text';
 import { Link } from './link';
 import { Tilt } from './tilt';
-import Image from 'gatsby-image'
+import Image from 'gatsby-image';
 
 type AlbumFeatureProps = {
   album: any;
@@ -13,7 +13,7 @@ const Container = styled.div`
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.4);
   transition: 0.2s ease;
   cursor: pointer;
   text-decoration: none;
@@ -32,14 +32,14 @@ const ReviewBadge = styled.div`
   width: 43px;
   height: 43px;
   border-radius: 10px;
-  background: #ece7e2;
+  background: rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 export const AlbumFeature: React.FC<AlbumFeatureProps> = ({ album }) => {
-  console.log(album.coverArt.fluid)
+  console.log(album.coverArt.fluid);
   return (
     <Link to={`/${album.slug}`}>
       <Tilt>

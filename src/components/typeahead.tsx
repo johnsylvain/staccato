@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useTransition, animated } from 'react-spring';
 import { Input } from './input';
 import { Text } from './text';
+import { Search } from './icon';
 
 type TypeaheadProps = React.HTMLAttributes<HTMLInputElement> & {
   options: any[];
@@ -25,6 +26,19 @@ const TypeaheadDropdown = styled(animated.div)`
   width: 100%;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
   transform-origin: top center;
+`;
+
+const InputWrapper = styled.div`
+  position: relative;
+`;
+
+const InputIcon = styled(Search)`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 14px;
+  font-size: 16px;
+  color: ${props => props.theme.colors.subtext};
 `;
 
 export const Typeahead: React.FC<TypeaheadProps> = ({
@@ -69,14 +83,18 @@ export const Typeahead: React.FC<TypeaheadProps> = ({
 
   return (
     <TypeaheadWrapper>
-      <Input
-        ref={inputRef}
-        small
-        value={value}
-        onChange={event => setValue(event.target.value)}
-        onClick={() => setActive(true)}
-        {...rest}
-      />
+      <InputWrapper>
+        <InputIcon />
+        <Input
+          ref={inputRef}
+          small
+          value={value}
+          onChange={event => setValue(event.target.value)}
+          onClick={() => setActive(true)}
+          style={{ paddingLeft: 40 }}
+          {...rest}
+        />
+      </InputWrapper>
       {transitions.map(
         ({ props, key, item }) =>
           item && (
