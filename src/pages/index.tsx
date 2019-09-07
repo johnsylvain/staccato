@@ -6,6 +6,7 @@ import { SEO } from '../components/seo';
 import { Text } from '../components/text';
 import { AlbumFeature } from '../components/album-feature';
 import { ButtonLink } from '../components/button';
+import { Tilt } from '../components/tilt';
 
 const Grid = styled.div`
   display: grid;
@@ -34,8 +35,8 @@ const IndexPage: React.FC = () => {
             rating
             slug
             coverArt {
-              file {
-                url
+              fluid(maxWidth: 500, maxHeight: 500) {
+                ...GatsbyContentfulFluid
               }
             }
           }

@@ -14,11 +14,6 @@ const query = graphql`
           albumName
           artistName
           slug
-          coverArt {
-            file {
-              url
-            }
-          }
         }
       }
     }
@@ -54,7 +49,7 @@ export const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
             }
           >
             {(option: any) => (
-              <Box p={3}>
+              <Box p={3} key={option.node.slug}>
                 <Link to={`/${option.node.slug}`}>
                   <Text bold mb={1} color="text">
                     {option.node.albumName}
