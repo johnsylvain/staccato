@@ -6,7 +6,14 @@ import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
 import { Text, Span, A } from '../components/text';
 import { Box, Flex } from '../components/box';
+import { Spotify, Share } from '../components/icon';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownContent,
+} from '../components/dropdown';
 import { renderRichText } from '../util/rich-text';
+import { createTwitterLink, createFacebookLink } from '../util/shareable-links';
 
 const Card = styled(Box)`
   background: rgba(255, 250, 250, 0.5);
@@ -77,15 +84,50 @@ const FullReview: React.FC<{ review: any }> = ({ review }) => {
                 {review.createdAt}
               </Text>
             </div>
-            <A
-              href={review.spotify}
-              target="_blank"
-              bold
-              color="spotify"
-              fontSize={1}
-            >
-              Listen on Spotify
-            </A>
+            <Flex>
+              <A
+                href={review.spotify}
+                target="_blank"
+                bold
+                color="subtext"
+                fontSize={3}
+              >
+                <Spotify />
+              </A>
+              <Dropdown>
+                <DropdownToggle>
+                  <Text ml={1} color="subtext" fontSize={3}>
+                    <Share />
+                  </Text>
+                </DropdownToggle>
+                <DropdownContent>
+                  <A
+                    href={createTwitterLink(
+                      review.artistName,
+                      review.albumName,
+                      review.slug
+                    )}
+                    target="_blank"
+                    color="subtext"
+                    fontSize={1}
+                    bold
+                  >
+                    Share on Twitter
+                  </A>
+                  <A
+                    href={createFacebookLink(
+                      review.slug
+                    )}
+                    target="_blank"
+                    color="subtext"
+                    fontSize={1}
+                    bold
+                  >
+                    Share on Facebook
+                  </A>
+                </DropdownContent>
+              </Dropdown>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
@@ -126,6 +168,7 @@ export const query = graphql`
       label
       rating
       releaseDate(formatString: "YYYY")
+      slug
       spotify
     }
   }
