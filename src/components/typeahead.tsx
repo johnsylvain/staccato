@@ -14,6 +14,7 @@ type TypeaheadProps = React.HTMLAttributes<HTMLInputElement> & {
 const TypeaheadWrapper = styled.div`
   position: relative;
   perspective: 1000px;
+  z-index: 9000;
 `;
 
 const TypeaheadDropdown = styled(animated.div)`
@@ -101,12 +102,12 @@ export const Typeahead: React.FC<TypeaheadProps> = ({
           item && (
             <TypeaheadDropdown style={props} key={key}>
               {filteredOptions.length ? (
-                filteredOptions.slice(0, 5).map(option => children(option))
+                filteredOptions.slice(0, 3).map(option => children(option))
               ) : (
-                <Text p={3} align="center" color="subtext">
-                  No reviews found.
+                  <Text p={3} align="center" color="subtext">
+                    No reviews found.
                 </Text>
-              )}
+                )}
             </TypeaheadDropdown>
           )
       )}

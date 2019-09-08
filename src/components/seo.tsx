@@ -19,7 +19,7 @@ export const SEO: React.FC<SEOProps> = ({
   lang = 'en',
   meta = [],
   title,
-  image
+  image,
 }) => {
   const { site } = useStaticQuery(
     graphql`
@@ -78,12 +78,12 @@ export const SEO: React.FC<SEOProps> = ({
         },
         {
           name: 'twitter:image',
-          content: image
+          content: image,
         },
         {
           name: 'og:image',
-          content: image
-        }
+          content: image,
+        },
       ].concat(meta)}
     />
   );

@@ -8,12 +8,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `staccato`,
+        short_name: `staccato`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
+        background_color: `#E5D9D9`,
+        theme_color: `#2c2c2c`,
+        display: `standalone`,
       },
     },
     `gatsby-plugin-typescript`,

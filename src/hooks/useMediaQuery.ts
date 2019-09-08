@@ -15,7 +15,7 @@ const queries: Breakpoints = Object.keys(theme.breakpoint).reduce(
 
 export function useMediaQuery(screenSize: BreakpointKeys): boolean {
   const query = queries[screenSize] || '(min-width: 0px)';
-  if (typeof window === 'undefined') return true;
+  if (typeof window === 'undefined') return false;
 
   const [matches, setMatches] = useState<boolean>(
     window.matchMedia(query).matches
