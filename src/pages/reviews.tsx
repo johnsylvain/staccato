@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import styled from 'styled-components';
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
-import { AlbumRow } from '../components/album-row';
+import { ReviewTile } from '../components/review-tile';
 import { Text } from '../components/text';
+import { Grid } from '../components/grid';
 
 const query = graphql`
   query {
@@ -26,16 +26,6 @@ const query = graphql`
   }
 `;
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: ${props => props.theme.spacing.md};
-
-  @media (max-width: ${props => props.theme.breakpoint.md}px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
 const Reviews: React.FC = () => {
   const data = useStaticQuery(query);
 
@@ -47,7 +37,7 @@ const Reviews: React.FC = () => {
       </Text>
       <Grid>
         {data.allContentfulReview.edges.map(({ node }) => (
-          <AlbumRow album={node} key={node.slug}></AlbumRow>
+          <ReviewTile album={node} key={node.slug}></ReviewTile>
         ))}
       </Grid>
     </Layout>

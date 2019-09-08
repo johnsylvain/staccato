@@ -35,13 +35,13 @@ const ReviewBadge = styled.div`
   justify-content: center;
 `;
 
-const FullReview: React.FC<{ album: any }> = ({ album }) => {
+const FullReview: React.FC<{ review: any }> = ({ review }) => {
   return (
     <Card mt={5} p={4} width={1}>
       <Flex>
         <Box width={[1, 1, 1 / 3]}>
           <ImageWrapper>
-            <Image fluid={album.coverArt.fluid}></Image>
+            <Image fluid={review.coverArt.fluid}></Image>
           </ImageWrapper>
         </Box>
         <Flex
@@ -53,32 +53,32 @@ const FullReview: React.FC<{ album: any }> = ({ album }) => {
           <Flex>
             <Box flex="1 1 auto">
               <Text fontSize={4} bold mb={1}>
-                {album.albumName}
+                {review.albumName}
               </Text>
-              <Text mb={2}>by {album.artistName}</Text>
+              <Text mb={2}>by {review.artistName}</Text>
             </Box>
             <ReviewBadge>
-              <Text bold>{album.rating}</Text>
+              <Text bold>{review.rating}</Text>
             </ReviewBadge>
           </Flex>
           <Text fontSize={1} color="subtext">
-            {album.label} <Span mx={1}>-</Span> {album.releaseDate}
+            {review.label} <Span mx={1}>-</Span> {review.releaseDate}
           </Text>
           <Box py={3} flex="1 1 auto">
-            {renderRichText(album.body.json)}
+            {renderRichText(review.body.json)}
           </Box>
 
           <Flex justifyContent="space-between" alignItems="flex-end">
             <div>
               <Text fontSize={1} color="subtext" mb={1}>
-                written by {album.author.name}
+                written by {review.author.name}
               </Text>
               <Text fontSize={1} color="subtext">
-                {album.createdAt}
+                {review.createdAt}
               </Text>
             </div>
             <A
-              href={album.spotify}
+              href={review.spotify}
               target="_blank"
               bold
               color="spotify"
@@ -101,7 +101,7 @@ const Review: React.FC<{ data: any }> = ({ data }) => {
         description={`Review of ${data.contentfulReview.albumName} by ${data.contentfulReview.artistName}`}
         image={'http:' + data.contentfulReview.coverArt.fluid.src}
       />
-      <FullReview album={data.contentfulReview} />
+      <FullReview review={data.contentfulReview} />
     </Layout>
   );
 };

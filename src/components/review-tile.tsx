@@ -5,7 +5,7 @@ import { Text } from './text';
 import { Link } from './link';
 import { Tilt } from './tilt';
 
-type AlbumRowProps = {
+type ReviewTileProps = {
   album: any;
 };
 
@@ -33,7 +33,7 @@ const AlbumRowContent = styled.div`
   flex-grow: 1;
 `;
 
-export const AlbumRow: React.FC<AlbumRowProps> = ({ album }) => {
+export const ReviewTile: React.FC<ReviewTileProps> = ({ album }) => {
   return (
     <Link to={`/${album.slug}`}>
       <Tilt>

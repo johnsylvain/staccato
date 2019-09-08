@@ -1,23 +1,11 @@
 import * as React from 'react';
-import { useStaticQuery, graphql, Link } from 'gatsby';
-import styled from 'styled-components';
+import { useStaticQuery, graphql } from 'gatsby';
+import { Grid } from '../components/grid';
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
 import { Text } from '../components/text';
-import { AlbumFeature } from '../components/album-feature';
+import { ReviewFeature } from '../components/review-feature';
 import { ButtonLink } from '../components/button';
-import { Tilt } from '../components/tilt';
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: ${props => props.theme.spacing.lg};
-  padding: ${props => props.theme.spacing.xl} 0;
-
-  @media (max-width: ${props => props.theme.breakpoint.md}px) {
-    grid-template-columns: 1fr;
-  }
-`;
 
 const IndexPage: React.FC = () => {
   const data = useStaticQuery(graphql`
@@ -54,7 +42,7 @@ const IndexPage: React.FC = () => {
       {data.allContentfulReview.edges.length && (
         <Grid>
           {data.allContentfulReview.edges.slice(0, 3).map(({ node }) => (
-            <AlbumFeature album={node} key={node.slug}></AlbumFeature>
+            <ReviewFeature review={node} key={node.slug}></ReviewFeature>
           ))}
         </Grid>
       )}

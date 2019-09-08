@@ -104,10 +104,10 @@ export const Typeahead: React.FC<TypeaheadProps> = ({
               {filteredOptions.length ? (
                 filteredOptions.slice(0, 3).map(option => children(option))
               ) : (
-                  <Text p={3} align="center" color="subtext">
-                    No reviews found.
+                <Text p={3} align="center" color="subtext">
+                  No reviews found.
                 </Text>
-                )}
+              )}
             </TypeaheadDropdown>
           )
       )}

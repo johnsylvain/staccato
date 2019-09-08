@@ -5,8 +5,8 @@ import { Link } from './link';
 import { Tilt } from './tilt';
 import Image from 'gatsby-image';
 
-type AlbumFeatureProps = {
-  album: any;
+type ReviewFeatureProps = {
+  review: any;
 };
 
 const Container = styled.div`
@@ -38,22 +38,22 @@ const ReviewBadge = styled.div`
   justify-content: center;
 `;
 
-export const AlbumFeature: React.FC<AlbumFeatureProps> = ({ album }) => {
+export const ReviewFeature: React.FC<ReviewFeatureProps> = ({ review }) => {
   return (
-    <Link to={`/${album.slug}`}>
+    <Link to={`/${review.slug}`}>
       <Tilt>
         <Container>
-          <Image fluid={album.coverArt.fluid} />
+          <Image fluid={review.coverArt.fluid} />
           <AlbumDetails>
             <div>
               <Text bold fontSize={3} mb={1}>
-                {album.albumName}
+                {review.albumName}
               </Text>
-              <Text>by {album.artistName}</Text>
+              <Text>by {review.artistName}</Text>
             </div>
             <ReviewBadge>
               <Text bold fontSize={3}>
-                {album.rating}
+                {review.rating}
               </Text>
             </ReviewBadge>
           </AlbumDetails>

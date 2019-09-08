@@ -6,7 +6,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 const query = graphql`
   query {
-    allContentfulAuthor {
+    allContentfulAuthor(sort: { order: ASC, fields: createdAt }) {
       edges {
         node {
           name
