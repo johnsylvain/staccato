@@ -4,6 +4,7 @@ import { Input } from './input';
 import { Text } from './text';
 import { Search } from './icon';
 import { Dropdown, DropdownContent } from './dropdown';
+import { useOutsideClick } from '../hooks/useOutsideClick';
 
 type TypeaheadProps = React.HTMLAttributes<HTMLInputElement> & {
   options: any[];
@@ -41,30 +42,13 @@ export const Typeahead: React.FC<TypeaheadProps> = ({
   const [value, setValue] = React.useState<string>('');
   const [active, setActive] = React.useState<boolean>(false);
   const [filteredOptions, setFilteredOptions] = React.useState<any>(options);
+  useOutsideClick(inputRef, () => setActive(false));
 
   React.useEffect(() => {
     setFilteredOptions(
       options.filter(option => filterBy(option, value.trim()))
     );
   }, [value, options]);
-
-  React.useEffect(() => {
-    const handler = (event: any) => {
-      if (!inputRef.current.contains(event.target)) {
-        setActive(false);
-      }
-    };
-
-    ['click', 'touchstart'].forEach(method => {
-      window.addEventListener(method, handler);
-    });
-
-    return () => {
-      ['click', 'touchstart'].forEach(method => {
-        window.removeEventListener(method, handler);
-      });
-    };
-  }, [inputRef]);
 
   return (
     <TypeaheadWrapper>
@@ -85,10 +69,10 @@ export const Typeahead: React.FC<TypeaheadProps> = ({
           {filteredOptions.length ? (
             filteredOptions.slice(0, 3).map(option => children(option))
           ) : (
-              <Text p={3} align="center" color="subtext">
-                No reviews found.
-                </Text>
-            )}
+            <Text p={3} align="center" color="subtext">
+              No reviews found.
+            </Text>
+          )}
         </DropdownContent>
       </Dropdown>
     </TypeaheadWrapper>

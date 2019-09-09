@@ -2,29 +2,23 @@ import * as React from 'react';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import Image from 'gatsby-image';
-import { SocialIcon } from 'react-social-icons';
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
 import { Text, Span } from '../components/text';
 import { Box, Flex } from '../components/box';
-import { Share } from '../components/icon';
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownContent,
-} from '../components/dropdown';
 import { Tilt } from '../components/tilt';
 import { renderRichText } from '../util/rich-text';
 import { createTwitterLink, createFacebookLink } from '../util/shareable-links';
+import { ShareButton } from '../components/share-button';
 
-const ShareButton = styled(Text)`
-  opacity: 0.5;
-  cursor: pointer;
+// const ShareButton = styled(Text)`
+//   opacity: 0.5;
+//   cursor: pointer;
 
-  &:hover {
-    opacity: 0.8;
-  }
-`
+//   &:hover {
+//     opacity: 0.8;
+//   }
+// `;
 
 const Card = styled(Box)`
   background: rgba(255, 250, 250, 0.5);
@@ -58,8 +52,13 @@ const ReviewBadge = styled.div`
 `;
 
 const FullReview: React.FC<{ review: any }> = ({ review }) => {
+  const socialLinks = [
+    createTwitterLink(review.artistName, review.albumName, review.slug),
+    createFacebookLink(review.slug),
+    review.spotify,
+  ];
   return (
-    <Card mt={5} p={4} width={1} >
+    <Card mt={5} p={4} width={1}>
       <Flex>
         <Box width={[1, 1, 1 / 3]}>
           <Tilt>
@@ -82,7 +81,9 @@ const FullReview: React.FC<{ review: any }> = ({ review }) => {
               <Text mb={2}>by {review.artistName}</Text>
             </Box>
             <ReviewBadge>
-              <Text bold fontSize={3}>{review.rating}</Text>
+              <Text bold fontSize={3}>
+                {review.rating}
+              </Text>
             </ReviewBadge>
           </Flex>
           <Text fontSize={1} color="subtext">
@@ -101,30 +102,7 @@ const FullReview: React.FC<{ review: any }> = ({ review }) => {
                 {review.createdAt}
               </Text>
             </div>
-            <Dropdown>
-              <DropdownToggle>
-                <ShareButton color="subtext" fontSize={4}>
-                  <Share />
-                </ShareButton>
-              </DropdownToggle>
-              <DropdownContent>
-                <Flex justifyContent="space-between">
-                  <SocialIcon
-                    url={createTwitterLink(
-                      review.artistName,
-                      review.albumName,
-                      review.slug
-                    )}
-                    target="_blank"
-                  ></SocialIcon>
-                  <SocialIcon
-                    url={createFacebookLink(review.slug)}
-                    target="_blank"
-                  ></SocialIcon>
-                  <SocialIcon url={review.spotify} target="_blank"></SocialIcon>
-                </Flex>
-              </DropdownContent>
-            </Dropdown>
+            <ShareButton links={socialLinks}></ShareButton>
           </Flex>
         </Flex>
       </Flex>

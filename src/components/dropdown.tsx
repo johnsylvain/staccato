@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { useTransition, animated } from 'react-spring';
+import { useOutsideClick } from '../hooks/useOutsideClick';
 
 type DropdownProps = {
   isOpen?: boolean;
@@ -12,7 +13,7 @@ type DropdownContext = {
 
 const DropdownContext = React.createContext<DropdownContext>({
   isOpen: false,
-  toggle: () => { },
+  toggle: () => {},
 });
 
 const DropdownContentWrapper = styled(animated.div)`
@@ -33,33 +34,19 @@ const DropdownWrapper = styled.div`
   perspective: 600px;
 `;
 
-export const Dropdown: React.FC<DropdownProps> = ({ isOpen: defaultIsOpened, children }) => {
+export const Dropdown: React.FC<DropdownProps> = ({
+  isOpen: defaultIsOpened,
+  children,
+}) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = React.useState<boolean>(defaultIsOpened);
+  useOutsideClick(ref, () => setIsOpen(false));
 
   React.useEffect(() => {
     if (typeof defaultIsOpened !== 'undefined') {
-      setIsOpen(defaultIsOpened)
+      setIsOpen(defaultIsOpened);
     }
-  }, [defaultIsOpened])
-
-  React.useEffect(() => {
-    const handler = (event: any) => {
-      if (!ref.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    ['click', 'touchstart'].forEach(method => {
-      window.addEventListener(method, handler);
-    });
-
-    return () => {
-      ['click', 'touchstart'].forEach(method => {
-        window.removeEventListener(method, handler);
-      });
-    };
-  }, [ref]);
+  }, [defaultIsOpened]);
 
   const toggle = () => setIsOpen(!isOpen);
 
