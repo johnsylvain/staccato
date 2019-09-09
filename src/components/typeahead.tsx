@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { useTransition, animated } from 'react-spring';
 import { Input } from './input';
 import { Text } from './text';
 import { Search } from './icon';
+import { Dropdown, DropdownContent } from './dropdown';
 
 type TypeaheadProps = React.HTMLAttributes<HTMLInputElement> & {
   options: any[];
@@ -15,18 +15,6 @@ const TypeaheadWrapper = styled.div`
   position: relative;
   perspective: 1000px;
   z-index: 9000;
-`;
-
-const TypeaheadDropdown = styled(animated.div)`
-  position: absolute;
-  z-index: 8000;
-  top: 120%;
-  background: white;
-  padding: 10px;
-  border-radius: 10px;
-  width: 100%;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
-  transform-origin: top center;
 `;
 
 const InputWrapper = styled.div`
@@ -53,11 +41,6 @@ export const Typeahead: React.FC<TypeaheadProps> = ({
   const [value, setValue] = React.useState<string>('');
   const [active, setActive] = React.useState<boolean>(false);
   const [filteredOptions, setFilteredOptions] = React.useState<any>(options);
-  const transitions = useTransition(active && !!value.length, null, {
-    from: { opacity: 0, transform: 'rotateX(20deg)' },
-    enter: { opacity: 1, transform: 'rotateX(0deg)' },
-    leave: { opacity: 0, transform: 'rotateX(20deg)' },
-  });
 
   React.useEffect(() => {
     setFilteredOptions(
@@ -85,32 +68,29 @@ export const Typeahead: React.FC<TypeaheadProps> = ({
 
   return (
     <TypeaheadWrapper>
-      <InputWrapper>
-        <Input
-          ref={inputRef}
-          small
-          value={value}
-          onChange={event => setValue(event.target.value)}
-          onClick={() => setActive(true)}
-          style={{ paddingLeft: 40 }}
-          {...rest}
-        />
-        <InputIcon />
-      </InputWrapper>
-      {transitions.map(
-        ({ props, key, item }) =>
-          item && (
-            <TypeaheadDropdown style={props} key={key}>
-              {filteredOptions.length ? (
-                filteredOptions.slice(0, 3).map(option => children(option))
-              ) : (
-                <Text p={3} align="center" color="subtext">
-                  No reviews found.
+      <Dropdown isOpen={active && !!value.length}>
+        <InputWrapper>
+          <Input
+            ref={inputRef}
+            small
+            value={value}
+            onChange={event => setValue(event.target.value)}
+            onClick={() => setActive(true)}
+            style={{ paddingLeft: 40 }}
+            {...rest}
+          />
+          <InputIcon />
+        </InputWrapper>
+        <DropdownContent>
+          {filteredOptions.length ? (
+            filteredOptions.slice(0, 3).map(option => children(option))
+          ) : (
+              <Text p={3} align="center" color="subtext">
+                No reviews found.
                 </Text>
-              )}
-            </TypeaheadDropdown>
-          )
-      )}
+            )}
+        </DropdownContent>
+      </Dropdown>
     </TypeaheadWrapper>
   );
 };

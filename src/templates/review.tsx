@@ -2,33 +2,48 @@ import * as React from 'react';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import Image from 'gatsby-image';
+import { SocialIcon } from 'react-social-icons';
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
-import { Text, Span, A } from '../components/text';
+import { Text, Span } from '../components/text';
 import { Box, Flex } from '../components/box';
-import { Spotify, Share } from '../components/icon';
+import { Share } from '../components/icon';
 import {
   Dropdown,
   DropdownToggle,
   DropdownContent,
 } from '../components/dropdown';
+import { Tilt } from '../components/tilt';
 import { renderRichText } from '../util/rich-text';
 import { createTwitterLink, createFacebookLink } from '../util/shareable-links';
+
+const ShareButton = styled(Text)`
+  opacity: 0.5;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`
 
 const Card = styled(Box)`
   background: rgba(255, 250, 250, 0.5);
   border-radius: 10px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
 `;
 
 const ImageWrapper = styled.div`
+  position: relative;
   border-radius: 10px;
   width: 100%;
   overflow: hidden;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
   top: -70px;
-  position: relative;
   margin-bottom: -70px;
+
+  @media (min-width: ${props => props.theme.breakpoint.md}px) {
+    top: 0px;
+    margin-bottom: 0px;
+  }
 `;
 
 const ReviewBadge = styled.div`
@@ -44,12 +59,14 @@ const ReviewBadge = styled.div`
 
 const FullReview: React.FC<{ review: any }> = ({ review }) => {
   return (
-    <Card mt={5} p={4} width={1}>
+    <Card mt={5} p={4} width={1} >
       <Flex>
         <Box width={[1, 1, 1 / 3]}>
-          <ImageWrapper>
-            <Image fluid={review.coverArt.fluid}></Image>
-          </ImageWrapper>
+          <Tilt>
+            <ImageWrapper>
+              <Image fluid={review.coverArt.fluid}></Image>
+            </ImageWrapper>
+          </Tilt>
         </Box>
         <Flex
           flexDirection="column"
@@ -65,7 +82,7 @@ const FullReview: React.FC<{ review: any }> = ({ review }) => {
               <Text mb={2}>by {review.artistName}</Text>
             </Box>
             <ReviewBadge>
-              <Text bold>{review.rating}</Text>
+              <Text bold fontSize={3}>{review.rating}</Text>
             </ReviewBadge>
           </Flex>
           <Text fontSize={1} color="subtext">
@@ -84,50 +101,30 @@ const FullReview: React.FC<{ review: any }> = ({ review }) => {
                 {review.createdAt}
               </Text>
             </div>
-            <Flex>
-              <A
-                href={review.spotify}
-                target="_blank"
-                bold
-                color="subtext"
-                fontSize={3}
-              >
-                <Spotify />
-              </A>
-              <Dropdown>
-                <DropdownToggle>
-                  <Text ml={1} color="subtext" fontSize={3}>
-                    <Share />
-                  </Text>
-                </DropdownToggle>
-                <DropdownContent>
-                  <A
-                    href={createTwitterLink(
+            <Dropdown>
+              <DropdownToggle>
+                <ShareButton color="subtext" fontSize={4}>
+                  <Share />
+                </ShareButton>
+              </DropdownToggle>
+              <DropdownContent>
+                <Flex justifyContent="space-between">
+                  <SocialIcon
+                    url={createTwitterLink(
                       review.artistName,
                       review.albumName,
                       review.slug
                     )}
                     target="_blank"
-                    color="subtext"
-                    fontSize={1}
-                    bold
-                  >
-                    Share on Twitter
-                  </A>
-                  <A
-                    href={createFacebookLink(
-                      review.slug
-                    )}
+                  ></SocialIcon>
+                  <SocialIcon
+                    url={createFacebookLink(review.slug)}
                     target="_blank"
-                    color="subtext"
-                    fontSize={1}
-                    bold
-                  >
-                    Share on Facebook
-                  </A>
-                </DropdownContent>
-              </Dropdown>
-            </Flex>
+                  ></SocialIcon>
+                  <SocialIcon url={review.spotify} target="_blank"></SocialIcon>
+                </Flex>
+              </DropdownContent>
+            </Dropdown>
           </Flex>
         </Flex>
       </Flex>

@@ -2,7 +2,9 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { useTransition, animated } from 'react-spring';
 
-type DropdownProps = {};
+type DropdownProps = {
+  isOpen?: boolean;
+};
 type DropdownContext = {
   isOpen: boolean;
   toggle: () => void;
@@ -10,17 +12,18 @@ type DropdownContext = {
 
 const DropdownContext = React.createContext<DropdownContext>({
   isOpen: false,
-  toggle: () => {},
+  toggle: () => { },
 });
 
 const DropdownContentWrapper = styled(animated.div)`
   position: absolute;
-  top: 120%;
+  top: 140%;
   right: 0;
   background: white;
   border-radius: 10px;
-  padding: ${props => props.theme.spacing.md};
+  padding: ${props => props.theme.spacing.sm};
   min-width: 200px;
+  width: 100%;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
   transform-origin: top center;
 `;
@@ -30,9 +33,15 @@ const DropdownWrapper = styled.div`
   perspective: 600px;
 `;
 
-export const Dropdown: React.FC<DropdownProps> = ({ children }) => {
+export const Dropdown: React.FC<DropdownProps> = ({ isOpen: defaultIsOpened, children }) => {
   const ref = React.useRef<HTMLDivElement>(null);
-  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [isOpen, setIsOpen] = React.useState<boolean>(defaultIsOpened);
+
+  React.useEffect(() => {
+    if (typeof defaultIsOpened !== 'undefined') {
+      setIsOpen(defaultIsOpened)
+    }
+  }, [defaultIsOpened])
 
   React.useEffect(() => {
     const handler = (event: any) => {

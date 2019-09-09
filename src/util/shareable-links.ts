@@ -8,6 +8,6 @@ export const createTwitterLink = (
 };
 
 export const createFacebookLink = (slug: string): string => {
-  const url = `https%3A//staccato.reviews/${slug}`
-  return `https://www.facebook.com/sharer/sharer.php?u=${url}`
-}
+  const url = `https://staccato.reviews/${slug}`;
+  return `https://www.facebook.com/sharer/sharer.php?u=${encodeURI(url)}`;
+};

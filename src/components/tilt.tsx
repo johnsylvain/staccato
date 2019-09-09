@@ -34,7 +34,7 @@ export const Tilt: React.FC<TiltProps> = ({ children }) => {
         });
       }}
       onMouseLeave={() => set({ xys: [0, 0, 1] })}
-      onMouseDown={() => set({ xys: [0, 0, 0.98] })}
+      onMouseDown={() => isMediumScreen && set({ xys: [0, 0, 0.98] })}
       style={{
         //@ts-ignore
         transform: props.xys.interpolate(trans),
