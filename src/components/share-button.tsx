@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useTransition } from 'react-spring';
 import { SocialIcon } from 'react-social-icons';
 import { Flex, Box } from './box';
 
