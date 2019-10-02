@@ -11,15 +11,6 @@ import { renderRichText } from '../util/rich-text';
 import { createTwitterLink, createFacebookLink } from '../util/shareable-links';
 import { ShareButton } from '../components/share-button';
 
-// const ShareButton = styled(Text)`
-//   opacity: 0.5;
-//   cursor: pointer;
-
-//   &:hover {
-//     opacity: 0.8;
-//   }
-// `;
-
 const Card = styled(Box)`
   background: rgba(255, 250, 250, 0.5);
   border-radius: 10px;

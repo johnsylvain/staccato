@@ -42,7 +42,7 @@ const font = {
   },
 };
 
-// styped-system theme
+// styled-system theme
 const fontSizes = Object.keys(font.size).map(key => font.size[key]);
 const space = ['0px', ...Object.keys(spacing).map(key => spacing[key])];
 const breakpoints = Object.keys(breakpoint).map(key => breakpoint[key] + 'px');

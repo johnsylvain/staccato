@@ -6,6 +6,7 @@ import { useOutsideClick } from '../hooks/useOutsideClick';
 type DropdownProps = {
   isOpen?: boolean;
 };
+
 type DropdownContext = {
   isOpen: boolean;
   toggle: () => void;
@@ -13,7 +14,7 @@ type DropdownContext = {
 
 const DropdownContext = React.createContext<DropdownContext>({
   isOpen: false,
-  toggle: () => {},
+  toggle: () => { },
 });
 
 const DropdownContentWrapper = styled(animated.div)`
