@@ -35,8 +35,13 @@ export const SEO: React.FC<SEOProps> = ({
     `
   );
 
+  const rootUrl =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:8080'
+      : 'https://staccato.reviews';
+
   const metaDescription = description || site.siteMetadata.description;
-  const metaImage = image || `${window.location.origin}${staccatoImage}`;
+  const metaImage = image || `${rootUrl}${staccatoImage}`;
 
   return (
     <Helmet
