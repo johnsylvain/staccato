@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
+import staccatoImage from '../images/staccato.png';
 
 type Meta =
   | { name: string; content: any; property?: undefined }
@@ -35,6 +36,7 @@ export const SEO: React.FC<SEOProps> = ({
   );
 
   const metaDescription = description || site.siteMetadata.description;
+  const metaImage = image || `${window.location.origin}${staccatoImage}`;
 
   return (
     <Helmet
@@ -78,11 +80,11 @@ export const SEO: React.FC<SEOProps> = ({
         },
         {
           name: 'twitter:image',
-          content: image,
+          content: metaImage,
         },
         {
           name: 'og:image',
-          content: image,
+          content: metaImage,
         },
       ].concat(meta)}
     />

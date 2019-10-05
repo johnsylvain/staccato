@@ -14,7 +14,7 @@ type DropdownContext = {
 
 const DropdownContext = React.createContext<DropdownContext>({
   isOpen: false,
-  toggle: () => { },
+  toggle: () => {},
 });
 
 const DropdownContentWrapper = styled(animated.div)`

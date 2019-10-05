@@ -4,10 +4,10 @@
 
 ## Stack
 
-* React + TypeScript
-* Gatsby
-* Contentful
-* Netlify
+- React + TypeScript
+- Gatsby
+- Contentful
+- Netlify
 
 ## Development
 
