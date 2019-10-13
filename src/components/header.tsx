@@ -6,6 +6,7 @@ import { Typeahead } from './typeahead';
 import { Text } from './text';
 import { Link } from './link';
 import { useMediaQuery } from '../hooks/useMediaQuery';
+import { fuzzyMatch } from '../util/fuzzy-match';
 
 const query = graphql`
   query {
@@ -45,12 +46,8 @@ export const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
               placeholder="Search for a review"
               options={data.allContentfulReview.edges}
               filterBy={(option, value) =>
-                option.node.artistName
-                  .toLowerCase()
-                  .includes(value.toLowerCase()) ||
-                option.node.albumName
-                  .toLowerCase()
-                  .includes(value.toLowerCase())
+                fuzzyMatch(value, option.node.albumName) ||
+                fuzzyMatch(value, option.node.artistName)
               }
             >
               {(option: any) => (
