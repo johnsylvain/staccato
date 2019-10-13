@@ -10,7 +10,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({ links }) => {
   return (
     <Flex>
       {links.map(link => (
-        <Box ml={2}>
+        <Box ml={2} key={link}>
           <SocialIcon
             url={link}
             target="_blank"
