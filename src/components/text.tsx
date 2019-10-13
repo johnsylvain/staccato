@@ -12,6 +12,7 @@ type TextProps = SpaceProps &
   ColorProps &
   TypographyProps & {
     bold?: boolean;
+    italic?: boolean;
     align?: 'center' | 'right' | 'left';
   };
 
@@ -22,6 +23,7 @@ export const Text = styled.div<TextProps>`
   font-weight: ${({ bold, theme }) =>
     bold ? theme.font.weight.bold : theme.font.weight.normal};
   text-align: ${({ align }) => (align ? align : 'left')};
+  font-style: ${({ italic }) => italic ? 'italic' : 'inherit'};
 `;
 
 export const Span = Text.withComponent('span');
