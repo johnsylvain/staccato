@@ -9,6 +9,12 @@ const StyledNav = styled.nav`
     display: flex;
     align-items: baseline;
   }
+
+  @media (max-width: ${props => props.theme.breakpoint.md}px) {
+    ul {
+      justify-content: space-between;
+    }
+  }
 `;
 
 const StyledNavItem = styled.li<{ brand?: boolean }>`

@@ -9,7 +9,7 @@ import { Text, Span } from '../components/text';
 const options: Options = {
   renderMark: {
     [MARKS.BOLD]: text => <Span bold>{text}</Span>,
-    [MARKS.ITALIC]: text => <Span italic>{text}</Span>
+    [MARKS.ITALIC]: text => <Span italic>{text}</Span>,
   },
   renderNode: {
     [BLOCKS.PARAGRAPH]: (node, children) => (
