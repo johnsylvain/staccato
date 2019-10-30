@@ -1,4 +1,4 @@
-type Cache = { [key: string]: RegExp }
+type Cache = { [key: string]: RegExp };
 
 export const fuzzyMatch = (() => {
   const cache: Cache = {};

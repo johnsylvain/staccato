@@ -49,7 +49,7 @@ const FullReview: React.FC<{ review: any }> = ({ review }) => {
     review.spotify,
   ];
   return (
-    <Card mt={5} p={4} width={1}>
+    <Card mt={5} p={[3, 4]} width={1}>
       <Flex>
         <Box width={[1, 1, 1 / 3]}>
           <Tilt>

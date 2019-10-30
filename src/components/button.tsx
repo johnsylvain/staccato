@@ -6,9 +6,9 @@ export const Button = styled.button<SpaceProps>`
   ${space}
 
   padding: ${props => props.theme.spacing.sm} ${props =>
-  props.theme.spacing.xl};
+    props.theme.spacing.xl};
   background: rgba(255, 255, 255, 0.4);
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.06);
   border-radius: 10px;
   font-family: inherit;
   font-size: ${props => props.theme.font.size.md};
