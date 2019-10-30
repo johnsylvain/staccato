@@ -12,7 +12,7 @@ type ReviewFeatureProps = {
 const Container = styled.div`
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.09);
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.06);
   background: rgba(255, 255, 255, 0.4);
   transition: 0.2s ease;
   cursor: pointer;

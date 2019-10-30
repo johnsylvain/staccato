@@ -14,7 +14,7 @@ type DropdownContext = {
 
 const DropdownContext = React.createContext<DropdownContext>({
   isOpen: false,
-  toggle: () => {},
+  toggle: () => { },
 });
 
 const DropdownContentWrapper = styled(animated.div)`
@@ -33,6 +33,7 @@ const DropdownContentWrapper = styled(animated.div)`
 const DropdownWrapper = styled.div`
   position: relative;
   perspective: 600px;
+  z-index: 9000;
 `;
 
 export const Dropdown: React.FC<DropdownProps> = ({
@@ -67,9 +68,9 @@ export const DropdownToggle: React.FC = ({ children }) => {
 export const DropdownContent: React.FC = ({ children }) => {
   const { isOpen } = React.useContext(DropdownContext);
   const transitions = useTransition(isOpen, null, {
-    from: { opacity: 0, transform: 'rotateX(20deg)' },
-    enter: { opacity: 1, transform: 'rotateX(0deg)' },
-    leave: { opacity: 0, transform: 'rotateX(20deg)' },
+    from: { opacity: 0, transform: 'translateY(-10px)' },
+    enter: { opacity: 1, transform: 'translateY(0px)' },
+    leave: { opacity: 0, transform: 'translateY(-10px)' },
   });
 
   return (

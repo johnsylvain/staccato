@@ -52,24 +52,24 @@ export const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                 ))}
               </>
             )}
-            {!isSmallScreen && (
-              <Dropdown>
-                <DropdownToggle>
-                  <Menu></Menu>
-                </DropdownToggle>
-                <DropdownContent>
-                  {links.map(link => (
-                    <Link to={link.to}>
-                      <Text bold p={2}>
-                        {link.label}
-                      </Text>
-                    </Link>
-                  ))}
-                </DropdownContent>
-              </Dropdown>
-            )}
           </Nav>
         </Box>
+        {!isSmallScreen && (
+          <Dropdown>
+            <DropdownToggle>
+              <Menu></Menu>
+            </DropdownToggle>
+            <DropdownContent>
+              {links.map(link => (
+                <Link to={link.to}>
+                  <Text bold p={2}>
+                    {link.label}
+                  </Text>
+                </Link>
+              ))}
+            </DropdownContent>
+          </Dropdown>
+        )}
         {isSmallScreen && (
           <Box width={300}>
             <Typeahead
